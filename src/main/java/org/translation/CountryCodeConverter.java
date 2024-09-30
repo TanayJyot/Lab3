@@ -45,8 +45,8 @@ public class CountryCodeConverter {
             while (iterator.hasNext()) {
                 String val = iterator.next();
                 String[] temp = val.split("\t");
-                countryToCode.put(temp[0], temp[2]);
-                codeToCountry.put(temp[2], temp[0]);
+                countryToCode.put(temp[0], temp[2].toLowerCase());
+                codeToCountry.put(temp[2].toLowerCase(), temp[0]);
             }
 
         }

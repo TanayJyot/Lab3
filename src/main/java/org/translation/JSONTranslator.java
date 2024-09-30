@@ -64,7 +64,7 @@ public class JSONTranslator implements Translator {
         // TODO Task: return an appropriate list of language codes,
         //            but make sure there is no aliasing to a mutable object
         Map values = finalValue.get("can");
-        ArrayList keyList = new ArrayList<>(values.keySet());
+        ArrayList<String> keyList = new ArrayList<>(values.keySet());
         return keyList;
     }
 
@@ -72,15 +72,15 @@ public class JSONTranslator implements Translator {
     public List<String> getCountries() {
         // TODO Task: return an appropriate list of country codes,
         //            but make sure there is no aliasing to a mutable object
-        ArrayList keyList = new ArrayList<>(finalValue.keySet());
+        ArrayList<String> keyList = new ArrayList<>(finalValue.keySet());
         return keyList;
     }
 
     @Override
     public String translate(String country, String language) {
         // TODO Task: complete this method using your instance variables as needed
-        Map countryMap = finalValue.get(country);
+        Map<String, String> countryMap = finalValue.get(country);
 
-        return (String) countryMap.get(language);
+        return countryMap.get(language);
     }
 }
