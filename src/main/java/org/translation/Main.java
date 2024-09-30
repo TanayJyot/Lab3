@@ -1,5 +1,8 @@
 package org.translation;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,11 +27,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // TODO Task: once you finish the JSONTranslator,
-        //            you can use it here instead of the InLabByHandTranslator
-        //            to try out the whole program!
-        // Translator translator = new JSONTranslator(null);
-        Translator translator = new InLabByHandTranslator();
+        Translator translator = new JSONTranslator(null);
+        //        Translator translator = new InLabByHandTranslator();
 
         runProgram(translator);
     }
@@ -42,8 +42,6 @@ public class Main {
     public static void runProgram(Translator translator) {
         while (true) {
             String country = promptForCountry(translator);
-            // TODO CheckStyle: The String "quit" appears 3 times in the file.
-            // TODO Checkstyle: String literal expressions should be on the left side of an equals comparison
             if (QUIT.equals(country)) {
                 break;
             }
@@ -77,7 +75,15 @@ public class Main {
         //            and print them out; one per line
         //      hint: class Collections provides a static sort method
         // TODO Task: convert the country codes to the actual country names before sorting
-        System.out.println(countries);
+        ArrayList<String> countryNameList = new ArrayList<String>();
+        CountryCodeConverter getCountryCode = new CountryCodeConverter();
+        for (String countryName: countries) {
+            countryNameList.add(getCountryCode.fromCountryCode(countryName));
+        }
+        Collections.sort(countryNameList);
+        for (String country: countryNameList) {
+            System.out.println(country);
+        }
 
         System.out.println("select a country from above:");
 
@@ -92,7 +98,16 @@ public class Main {
         // TODO Task: replace the line below so that we sort the languages alphabetically and print them out;
         //  one per line
         // TODO Task: convert the language codes to the actual language names before sorting
-        System.out.println(translator.getCountryLanguages(country));
+        List<String> languages = translator.getCountryLanguages(country);
+        ArrayList<String> languageNameList = new ArrayList<String>();
+        LanguageCodeConverter getLanguageName = new LanguageCodeConverter();
+        for (String language: languages) {
+            languageNameList.add(getLanguageName.fromLanguageCode(language));
+        }
+        Collections.sort(languageNameList);
+        for (String lang: languageNameList) {
+            System.out.println(lang);
+        }
 
         System.out.println("select a language from above:");
 
